@@ -1,0 +1,553 @@
+{
+  "version": "4.0",
+  "total_attacks": 15,
+  "difficulty": "CCIE+ Expert",
+  "description": "Ralph Red vs Blue v4 - 15 Expert-Level Chaos Engineering Attacks",
+  "forbidden_attacks": [
+    "interface shutdown (CE-facing)",
+    "neighbor X.X.X.X shutdown",
+    "no redistribute connected",
+    "no isis enable CORE (alone)"
+  ],
+  "attacks": [
+    {
+      "round": 1,
+      "id": "ML-E6",
+      "name": "Triple-Layer Attack",
+      "category": "Multi-Layer",
+      "difficulty": "ULTIMATE",
+      "target": {
+        "device": "pe3",
+        "vrf": "GAMMA"
+      },
+      "noc_ticket": "GAMMA customer reports complete service outage, other customers unaffected",
+      "commands": [
+        {
+          "device": "pe3",
+          "commands": [
+            "configure terminal",
+            "interface Ethernet1",
+            "no isis enable CORE",
+            "exit",
+            "interface Loopback0",
+            "no node-segment ipv4 index",
+            "exit",
+            "router bgp 65000",
+            "no neighbor RR send-community extended",
+            "end"
+          ],
+          "description": "Triple attack: ISIS + Node-SID + BGP communities"
+        }
+      ],
+      "fix": [
+        "interface Ethernet1 / isis enable CORE",
+        "interface Loopback0 / node-segment ipv4 index 23",
+        "router bgp 65000 / neighbor RR send-community extended"
+      ],
+      "why_hard": "Blue must find and fix ALL 3 issues. Fixing 1 or 2 won't restore service."
+    },
+    {
+      "round": 2,
+      "id": "MIS-E4",
+      "name": "One-Way ACL",
+      "category": "Misdirection",
+      "difficulty": "Hard",
+      "target": {
+        "device": "pe2",
+        "vrf": "BETA"
+      },
+      "noc_ticket": "BETA customer can initiate connections but responses never arrive",
+      "commands": [
+        {
+          "device": "pe2",
+          "commands": [
+            "configure terminal",
+            "ip access-list BLOCK-RETURN",
+            "deny ip any 192.168.5.0/24",
+            "permit ip any any",
+            "exit",
+            "interface Ethernet3",
+            "ip access-group BLOCK-RETURN in",
+            "end"
+          ],
+          "description": "Block return traffic to remote CE5"
+        }
+      ],
+      "fix": [
+        "interface Ethernet3 / no ip access-group BLOCK-RETURN in",
+        "no ip access-list BLOCK-RETURN"
+      ],
+      "why_hard": "ACL on return path, not outbound. Blue may check wrong direction."
+    },
+    {
+      "round": 3,
+      "id": "SR-E2",
+      "name": "SRGB Mismatch",
+      "category": "SR-MPLS",
+      "difficulty": "Expert",
+      "target": {
+        "device": "p3",
+        "vrf": null
+      },
+      "noc_ticket": "Intermittent packet loss affecting traffic through specific path",
+      "commands": [
+        {
+          "device": "p3",
+          "commands": [
+            "configure terminal",
+            "segment-routing mpls",
+            "global-block 800000 865535",
+            "end"
+          ],
+          "description": "Change SRGB to non-default range"
+        }
+      ],
+      "fix": [
+        "segment-routing mpls / global-block 900000 965535"
+      ],
+      "why_hard": "Only affects traffic through P3. Requires SRGB understanding."
+    },
+    {
+      "round": 4,
+      "id": "INT-E4",
+      "name": "MTU Black Hole",
+      "category": "Intermittent",
+      "difficulty": "Medium-Hard",
+      "target": {
+        "device": "p2",
+        "interface": "Ethernet3",
+        "vrf": null
+      },
+      "noc_ticket": "Customer reports large file transfers fail but email and web browsing work fine",
+      "commands": [
+        {
+          "device": "p2",
+          "commands": [
+            "configure terminal",
+            "interface Ethernet3",
+            "mtu 1400",
+            "end"
+          ],
+          "description": "Set small MTU on P2-P3 core link"
+        }
+      ],
+      "fix": [
+        "interface Ethernet3 / mtu 9214"
+      ],
+      "why_hard": "Small packets work, large fail. Ping succeeds but transfers fail."
+    },
+    {
+      "round": 5,
+      "id": "XV-E6",
+      "name": "Multi-VRF Cascade",
+      "category": "Cross-VRF",
+      "difficulty": "ULTIMATE",
+      "target": {
+        "device": "pe1,pe2,pe3",
+        "vrf": "ALL"
+      },
+      "noc_ticket": "Multiple customers reporting various connectivity issues - ALPHA, BETA, and GAMMA all affected",
+      "commands": [
+        {
+          "device": "pe1",
+          "commands": [
+            "configure terminal",
+            "vrf instance ALPHA",
+            "no route-target export vpn-ipv4 65000:100",
+            "route-target export vpn-ipv4 65000:999",
+            "end"
+          ],
+          "description": "Break ALPHA export RT"
+        },
+        {
+          "device": "pe2",
+          "commands": [
+            "configure terminal",
+            "vrf instance BETA",
+            "route-target import vpn-ipv4 65000:999",
+            "end"
+          ],
+          "description": "BETA imports wrong RT"
+        },
+        {
+          "device": "pe3",
+          "commands": [
+            "configure terminal",
+            "vrf instance GAMMA",
+            "no route-target export vpn-ipv4 65000:300",
+            "route-target export vpn-ipv4 65000:888",
+            "end"
+          ],
+          "description": "Break GAMMA export RT"
+        }
+      ],
+      "fix": [
+        "PE1: vrf ALPHA / route-target export vpn-ipv4 65000:100",
+        "PE2: vrf BETA / no route-target import vpn-ipv4 65000:999",
+        "PE3: vrf GAMMA / route-target export vpn-ipv4 65000:300"
+      ],
+      "why_hard": "3 VRFs, 3 different issues. Must trace RT mismatches across all."
+    },
+    {
+      "round": 6,
+      "id": "POL-E2",
+      "name": "Route-Map Sequence Swap",
+      "category": "Policy",
+      "difficulty": "Expert",
+      "target": {
+        "device": "pe1",
+        "vrf": "ALPHA"
+      },
+      "noc_ticket": "ALPHA customer routes not appearing in routing table",
+      "commands": [
+        {
+          "device": "pe1",
+          "commands": [
+            "configure terminal",
+            "no route-map CE1-IN",
+            "route-map CE1-IN deny 5",
+            "match ip address prefix-list CE1-ALLOWED",
+            "exit",
+            "route-map CE1-IN permit 10",
+            "match ip address prefix-list BOGONS",
+            "end"
+          ],
+          "description": "Invert route-map sequences"
+        }
+      ],
+      "fix": [
+        "Restore original CE1-IN with permit before deny"
+      ],
+      "why_hard": "Deny comes before permit. Subtle sequence issue."
+    },
+    {
+      "round": 7,
+      "id": "MIS-E5",
+      "name": "Community Strip",
+      "category": "Misdirection",
+      "difficulty": "Expert",
+      "target": {
+        "device": "pe5",
+        "vrf": "BETA"
+      },
+      "noc_ticket": "Customer routes exist but traffic is being dropped somewhere",
+      "commands": [
+        {
+          "device": "pe5",
+          "commands": [
+            "configure terminal",
+            "route-map CE5-IN permit 10",
+            "no set community",
+            "set community none",
+            "end"
+          ],
+          "description": "Strip all communities from CE routes"
+        }
+      ],
+      "fix": [
+        "route-map CE5-IN permit 10 / set community 65000:200 additive"
+      ],
+      "why_hard": "Routes accepted but communities stripped. Silent failure."
+    },
+    {
+      "round": 8,
+      "id": "ML-E5",
+      "name": "Cross-VRF Symptom",
+      "category": "Multi-Layer",
+      "difficulty": "Expert",
+      "target": {
+        "device": "pe1",
+        "vrf": "ALPHA"
+      },
+      "noc_ticket": "BETA customer seeing unexpected routes, possible route leak",
+      "commands": [
+        {
+          "device": "pe1",
+          "commands": [
+            "configure terminal",
+            "vrf instance ALPHA",
+            "route-target export vpn-ipv4 65000:200",
+            "end"
+          ],
+          "description": "Leak ALPHA routes into BETA RT"
+        }
+      ],
+      "fix": [
+        "vrf ALPHA / no route-target export vpn-ipv4 65000:200"
+      ],
+      "why_hard": "Ticket about BETA but problem is ALPHA's export RT."
+    },
+    {
+      "round": 9,
+      "id": "TE-E5",
+      "name": "Next-Hop-Self Removal",
+      "category": "TrafficEngineering",
+      "difficulty": "Expert",
+      "target": {
+        "device": "rr1",
+        "vrf": null
+      },
+      "noc_ticket": "Routes visible in BGP but traffic black-holing to specific destinations",
+      "commands": [
+        {
+          "device": "rr1",
+          "commands": [
+            "configure terminal",
+            "router bgp 65000",
+            "neighbor PE-CLIENTS no next-hop-self",
+            "end"
+          ],
+          "description": "Remove next-hop-self from PE clients"
+        }
+      ],
+      "fix": [
+        "router bgp 65000 / neighbor PE-CLIENTS next-hop-self"
+      ],
+      "why_hard": "Routes present, sessions UP, but forwarding broken."
+    },
+    {
+      "round": 10,
+      "id": "RCF-E2",
+      "name": "RCF Logic Inversion",
+      "category": "RCF",
+      "difficulty": "Expert",
+      "target": {
+        "device": "pe1",
+        "vrf": "ALPHA"
+      },
+      "noc_ticket": "ALPHA customer routes being rejected, policy may be misconfigured",
+      "commands": [
+        {
+          "device": "pe1",
+          "commands": [
+            "configure terminal",
+            "router general",
+            "control-functions",
+            "code",
+            "function BAD_LOGIC() {",
+            "if match ip_prefix_list_v4(CE1-ALLOWED) {",
+            "return false",
+            "}",
+            "return true",
+            "}",
+            "EOF",
+            "exit",
+            "exit",
+            "router bgp 65000",
+            "vrf ALPHA",
+            "neighbor 192.168.1.2 rcf in BAD_LOGIC()",
+            "end"
+          ],
+          "description": "Apply inverted logic RCF"
+        }
+      ],
+      "fix": [
+        "Remove RCF and restore route-map"
+      ],
+      "why_hard": "RCF logic inverted. Most unfamiliar with RCF."
+    },
+    {
+      "round": 11,
+      "id": "INT-E6",
+      "name": "ISIS Metric Oscillation",
+      "category": "Intermittent",
+      "difficulty": "Hard",
+      "target": {
+        "device": "p1,p3",
+        "vrf": null
+      },
+      "noc_ticket": "Customer reports intermittent packet loss and route changes",
+      "commands": [
+        {
+          "device": "p1",
+          "commands": [
+            "configure terminal",
+            "interface Ethernet2",
+            "isis metric 100",
+            "end"
+          ],
+          "description": "Change P1-P2 link metric"
+        },
+        {
+          "device": "p3",
+          "commands": [
+            "configure terminal",
+            "interface Ethernet2",
+            "isis metric 100",
+            "end"
+          ],
+          "description": "Change P3-P2 link metric to create equal-cost"
+        }
+      ],
+      "fix": [
+        "Both interfaces: isis metric 10"
+      ],
+      "why_hard": "Equal-cost paths oscillate. Timing-dependent."
+    },
+    {
+      "round": 12,
+      "id": "MIS-E3",
+      "name": "Metric Maze",
+      "category": "Misdirection",
+      "difficulty": "Hard",
+      "target": {
+        "device": "p1,p2,p3",
+        "vrf": null
+      },
+      "noc_ticket": "Suboptimal routing reported, traffic taking longer path",
+      "commands": [
+        {
+          "device": "p1",
+          "commands": [
+            "configure terminal",
+            "interface Ethernet1",
+            "isis metric 50",
+            "end"
+          ],
+          "description": "P1 decoy metric"
+        },
+        {
+          "device": "p2",
+          "commands": [
+            "configure terminal",
+            "interface Ethernet2",
+            "isis metric 50",
+            "end"
+          ],
+          "description": "P2 decoy metric"
+        },
+        {
+          "device": "p3",
+          "commands": [
+            "configure terminal",
+            "interface Ethernet3",
+            "isis metric 16777214",
+            "end"
+          ],
+          "description": "P3 REAL issue - max metric"
+        }
+      ],
+      "fix": [
+        "Only P3 Ethernet3 needs fixing: isis metric 10"
+      ],
+      "why_hard": "3 metrics changed, only P3 matters. Red herrings."
+    },
+    {
+      "round": 13,
+      "id": "SR-E6",
+      "name": "Anycast SID Conflict",
+      "category": "SR-MPLS",
+      "difficulty": "Expert",
+      "target": {
+        "device": "pe1,pe2",
+        "vrf": null
+      },
+      "noc_ticket": "Load balancing not working as expected between sites",
+      "commands": [
+        {
+          "device": "pe1",
+          "commands": [
+            "configure terminal",
+            "interface Loopback1",
+            "ip address 10.255.255.1/32",
+            "node-segment ipv4 index 100",
+            "isis enable CORE",
+            "end"
+          ],
+          "description": "Add anycast loopback with SID"
+        },
+        {
+          "device": "pe2",
+          "commands": [
+            "configure terminal",
+            "interface Loopback1",
+            "ip address 10.255.255.1/32",
+            "node-segment ipv4 index 100",
+            "isis enable CORE",
+            "end"
+          ],
+          "description": "Add same anycast loopback on PE2"
+        }
+      ],
+      "fix": [
+        "Both PEs: no interface Loopback1"
+      ],
+      "why_hard": "Same anycast prefix + SID. Ambiguous forwarding."
+    },
+    {
+      "round": 14,
+      "id": "V6-E3",
+      "name": "Dual-Stack Asymmetry",
+      "category": "IPv6",
+      "difficulty": "Expert",
+      "target": {
+        "device": "p3",
+        "vrf": null
+      },
+      "noc_ticket": "IPv6 connectivity issues, IPv4 working normally",
+      "commands": [
+        {
+          "device": "p3",
+          "commands": [
+            "configure terminal",
+            "router isis CORE",
+            "address-family ipv6 unicast",
+            "no multi-topology",
+            "end"
+          ],
+          "description": "Disable IPv6 multi-topology"
+        }
+      ],
+      "fix": [
+        "router isis CORE / address-family ipv6 unicast / multi-topology"
+      ],
+      "why_hard": "IPv6 uses IPv4 topology, may black-hole."
+    },
+    {
+      "round": 15,
+      "id": "ML-E4",
+      "name": "RR Policy Corruption + Decoy",
+      "category": "Multi-Layer",
+      "difficulty": "ULTIMATE",
+      "target": {
+        "device": "pe5,pe6",
+        "vrf": "BETA"
+      },
+      "noc_ticket": "BETA VPN completely down. PE6 showing ISIS metric changes in logs. Multiple alarms firing.",
+      "commands": [
+        {
+          "device": "pe5",
+          "commands": [
+            "configure terminal",
+            "ip prefix-list DENY-ALL seq 10 deny 0.0.0.0/0 le 32",
+            "route-map RR-BLOCK-IN deny 10",
+            "match ip address prefix-list DENY-ALL",
+            "exit",
+            "route-map RR-BLOCK-IN deny 20",
+            "exit",
+            "router bgp 65000",
+            "neighbor 10.0.0.1 route-map RR-BLOCK-IN in",
+            "neighbor 10.0.0.2 route-map RR-BLOCK-IN in",
+            "end"
+          ],
+          "description": "Block all routes from RRs via policy"
+        },
+        {
+          "device": "pe6",
+          "commands": [
+            "configure terminal",
+            "interface Ethernet1",
+            "isis metric 999",
+            "end"
+          ],
+          "description": "Decoy - ISIS metric alarm"
+        }
+      ],
+      "fix": [
+        "PE5: no route-map RR-BLOCK-IN, remove from neighbors",
+        "PE6: isis metric 10 (optional, decoy)"
+      ],
+      "why_hard": "BGP sessions UP but routes filtered. PE6 decoy distracts."
+    }
+  ]
+}
