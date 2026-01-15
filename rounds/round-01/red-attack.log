@@ -1,0 +1,37 @@
+# Round 1 - Red Attack Execution Log
+# Timestamp: 2026-01-15T12:35:00Z
+# Target: PE3 (GAMMA VRF)
+
+## Attack Commands Executed
+
+```
+PE3# configure terminal
+PE3(config)# interface Ethernet1
+PE3(config-if-Et1)# no isis enable CORE
+PE3(config-if-Et1)# exit
+PE3(config)# router isis CORE
+PE3(config-router-isis)# no segment-routing mpls
+PE3(config-router-isis)# exit
+PE3(config)# router bgp 65000
+PE3(config-router-bgp)# no neighbor RR send-community extended
+PE3(config-router-bgp)# end
+PE3# write memory
+```
+
+## Post-Attack Verification
+
+| VRF | Source | Destination | Result |
+|-----|--------|-------------|--------|
+| ALPHA | CE1 | CE4 (192.168.4.2) | 0% loss - PASS |
+| BETA | CE2 | CE5 (192.168.5.2) | 0% loss - PASS |
+| GAMMA | CE3 | CE6 (192.168.6.2) | 100% loss - BROKEN |
+
+## Attack Status: SUCCESS
+
+GAMMA VRF completely broken while ALPHA and BETA remain operational.
+All 3 attack components applied:
+1. ISIS removed from Et1
+2. Segment Routing MPLS removed from ISIS
+3. Extended community removed from BGP
+
+NOC ticket delivered to Blue team.
