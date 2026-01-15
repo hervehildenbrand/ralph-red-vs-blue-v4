@@ -50,7 +50,7 @@ write memory
 Connect to PE1 and PE2 via:
 ```bash
 # PE1 - Create anycast loopback
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'configure terminal
 interface Loopback1
 ip address 10.255.255.1/32
 exit
@@ -64,7 +64,7 @@ end
 write memory'"
 
 # PE2 - Create conflicting anycast loopback
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe2 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe2 Cli -c 'configure terminal
 interface Loopback1
 ip address 10.255.255.1/32
 exit
@@ -83,14 +83,14 @@ write memory'"
 After attack, verify anycast conflict:
 ```bash
 # Check SR SIDs on both PEs
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'show isis segment-routing sid'"
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe2 Cli -c 'show isis segment-routing sid'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'show isis segment-routing sid'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe2 Cli -c 'show isis segment-routing sid'"
 
 # Check MPLS forwarding for conflicts
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-p1 Cli -c 'show mpls lfib route'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-p1 Cli -c 'show mpls lfib route'"
 
 # Verify unpredictable load balancing
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce1 ping -c 5 192.168.4.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce1 ping -c 5 192.168.4.2"
 ```
 
 Expected result: **Load balancing not working as expected**, traffic unpredictable.

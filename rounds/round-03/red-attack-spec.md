@@ -30,7 +30,7 @@ write memory
 
 Connect to P3 via:
 ```bash
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-p3 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-p3 Cli -c 'configure terminal
 router isis CORE
 segment-routing mpls
 no global-block
@@ -46,12 +46,12 @@ write memory'"
 After attack, verify traffic through P3 is affected:
 ```bash
 # Check SRGB mismatch
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-p3 Cli -c 'show isis segment-routing global-blocks'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-p3 Cli -c 'show isis segment-routing global-blocks'"
 
 # Verify connectivity issues
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 192.168.4.2"
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce2 ping -c 3 192.168.5.2"
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce3 ping -c 3 192.168.6.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 192.168.4.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce2 ping -c 3 192.168.5.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce3 ping -c 3 192.168.6.2"
 ```
 
 Expected result: **Intermittent packet loss** for traffic traversing P3.

@@ -13,7 +13,7 @@ No build required.
 
 Diagnose and fix network issues via SSH to ContainerLab server:
 ```bash
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-[device] Cli -c '[commands]'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-[device] Cli -c '[commands]'"
 ```
 
 ## Test
@@ -21,13 +21,13 @@ ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-[device] Cli -c '
 After applying fix, verify ALL 3 VRFs are operational:
 ```bash
 # VRF ALPHA
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 192.168.4.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 192.168.4.2"
 
 # VRF BETA
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce2 ping -c 3 192.168.5.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce2 ping -c 3 192.168.5.2"
 
 # VRF GAMMA
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce3 ping -c 3 192.168.6.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce3 ping -c 3 192.168.6.2"
 ```
 
 Expected result: 0% packet loss for ALL VRFs.

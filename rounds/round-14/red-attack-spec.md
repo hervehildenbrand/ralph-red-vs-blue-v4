@@ -29,7 +29,7 @@ write memory
 
 Connect to P3 via:
 ```bash
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-p3 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-p3 Cli -c 'configure terminal
 router isis CORE
 address-family ipv6 unicast
 no multi-topology
@@ -44,16 +44,16 @@ write memory'"
 After attack, verify IPv6 issues:
 ```bash
 # Check ISIS IPv6 configuration
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-p3 Cli -c 'show running-config section isis'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-p3 Cli -c 'show running-config section isis'"
 
 # Check IPv6 routing
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-p3 Cli -c 'show ipv6 route'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-p3 Cli -c 'show ipv6 route'"
 
 # Verify IPv6 connectivity issues
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce1 ping6 -c 3 2001:db8:4::2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce1 ping6 -c 3 2001:db8:4::2"
 
 # Verify IPv4 still works
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 192.168.4.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 192.168.4.2"
 ```
 
 Expected result: **IPv6 connectivity issues while IPv4 works normally**.

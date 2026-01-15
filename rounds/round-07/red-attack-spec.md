@@ -27,7 +27,7 @@ write memory
 
 Connect to PE5 via:
 ```bash
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe5 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe5 Cli -c 'configure terminal
 route-map CE5-IN permit 10
 set community none
 exit
@@ -40,13 +40,13 @@ write memory'"
 After attack, verify community stripping:
 ```bash
 # Check route-map
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe5 Cli -c 'show route-map CE5-IN'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe5 Cli -c 'show route-map CE5-IN'"
 
 # Check BGP routes and communities
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe5 Cli -c 'show ip bgp vrf BETA'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe5 Cli -c 'show ip bgp vrf BETA'"
 
 # Verify BETA VRF issues
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce2 ping -c 3 192.168.5.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce2 ping -c 3 192.168.5.2"
 ```
 
 Expected result: **Routes exist but traffic is being dropped** due to missing community-based policy decisions.

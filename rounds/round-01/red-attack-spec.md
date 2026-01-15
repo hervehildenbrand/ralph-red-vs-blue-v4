@@ -42,14 +42,14 @@ write memory
 
 Connect to PE3 via:
 ```bash
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe3 Cli -c '[commands]'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe3 Cli -c '[commands]'"
 ```
 
 ## Verification
 
 After attack, verify GAMMA VRF is broken:
 ```bash
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce3 ping -c 3 192.168.6.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce3 ping -c 3 192.168.6.2"
 ```
 
 Expected result: **100% packet loss** for GAMMA VRF.

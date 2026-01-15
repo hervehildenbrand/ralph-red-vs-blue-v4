@@ -13,14 +13,14 @@ No build required.
 
 Execute attack commands via SSH to ContainerLab server:
 ```bash
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-[device] Cli -c '[commands]'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-[device] Cli -c '[commands]'"
 ```
 
 ## Test
 
 After executing attack, verify the target VRF is broken:
 ```bash
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce[X] ping -c 3 192.168.[Y].2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce[X] ping -c 3 192.168.[Y].2"
 ```
 
 Expected result: 100% packet loss for target VRF.

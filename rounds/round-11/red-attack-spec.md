@@ -38,7 +38,7 @@ write memory
 Connect to P1 and P3 via:
 ```bash
 # P1 - Set high metric
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-p1 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-p1 Cli -c 'configure terminal
 interface Ethernet2
 isis metric 100
 exit
@@ -46,7 +46,7 @@ end
 write memory'"
 
 # P3 - Set high metric
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-p3 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-p3 Cli -c 'configure terminal
 interface Ethernet2
 isis metric 100
 exit
@@ -59,13 +59,13 @@ write memory'"
 After attack, verify metric changes and instability:
 ```bash
 # Check ISIS database and metrics
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-p1 Cli -c 'show isis database detail'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-p1 Cli -c 'show isis database detail'"
 
 # Check for route flapping
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'show ip route'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'show ip route'"
 
 # Verify intermittent connectivity
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce1 ping -c 10 192.168.4.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce1 ping -c 10 192.168.4.2"
 ```
 
 Expected result: **Intermittent packet loss** and route changes.

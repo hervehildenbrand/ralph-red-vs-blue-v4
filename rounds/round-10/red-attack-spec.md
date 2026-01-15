@@ -41,7 +41,7 @@ write memory
 
 Connect to PE1 via:
 ```bash
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'configure terminal
 router general
 control-functions
 code
@@ -68,13 +68,13 @@ write memory'"
 After attack, verify RCF is blocking routes:
 ```bash
 # Check RCF configuration
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'show running-config section control-functions'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'show running-config section control-functions'"
 
 # Check BGP VRF routes
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'show ip bgp vrf ALPHA'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'show ip bgp vrf ALPHA'"
 
 # Verify ALPHA broken
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 192.168.4.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 192.168.4.2"
 ```
 
 Expected result: **ALPHA VRF routes being rejected** by the RCF.

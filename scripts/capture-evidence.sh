@@ -25,7 +25,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 ROUND_DIR="$PROJECT_DIR/rounds/round-$(printf '%02d' $ROUND)"
 EVIDENCE_DIR="$ROUND_DIR/evidence/${PHASE}-state"
-REMOTE_HOST="hhildenbrand@192.168.1.12"
+REMOTE_HOST="labuser@<server-ip>"
 LAB_NAME="red-vs-blue-v3"
 TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 

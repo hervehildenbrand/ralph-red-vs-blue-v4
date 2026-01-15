@@ -113,7 +113,7 @@ ralph-red-vs-blue-v4/
 
 ### Deploy Topology
 ```bash
-ssh hhildenbrand@192.168.1.12
+ssh labuser@<server-ip>
 cd /path/to/lab
 sudo clab deploy -t topology/red-vs-blue-v3.clab.yml
 ```

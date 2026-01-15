@@ -45,7 +45,7 @@ write memory
 
 ```bash
 # PE5 - Silent route rejection (BGP sessions UP, routes rejected)
-ssh hhildenbrand@192.168.1.12 "docker exec -i clab-red-vs-blue-v3-pe5 Cli" <<'EOFCLI'
+ssh labuser@<server-ip> "docker exec -i clab-red-vs-blue-v3-pe5 Cli" <<'EOFCLI'
 enable
 configure
 ip prefix-list DENY-ALL seq 10 deny 0.0.0.0/0 le 32
@@ -63,7 +63,7 @@ write memory
 EOFCLI
 
 # PE6 - Decoy metric change
-ssh hhildenbrand@192.168.1.12 "docker exec -i clab-red-vs-blue-v3-pe6 Cli" <<'EOFCLI'
+ssh labuser@<server-ip> "docker exec -i clab-red-vs-blue-v3-pe6 Cli" <<'EOFCLI'
 enable
 configure
 interface Ethernet1
@@ -79,10 +79,10 @@ EOFCLI
 Check that BGP sessions are UP but routes are filtered:
 ```bash
 # BGP session should show Established
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe5 Cli -c 'show bgp summary'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe5 Cli -c 'show bgp summary'"
 
 # VRF routes should be missing
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe5 Cli -c 'show ip route vrf BETA'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe5 Cli -c 'show ip route vrf BETA'"
 ```
 
 ## Success Criteria

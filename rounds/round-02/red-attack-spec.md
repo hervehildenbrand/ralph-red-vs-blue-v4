@@ -31,14 +31,14 @@ write memory
 
 Connect to PE2 via:
 ```bash
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe2 Cli -c '[commands]'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe2 Cli -c '[commands]'"
 ```
 
 ## Verification
 
 After attack, verify BETA VRF is broken:
 ```bash
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce2 ping -c 3 192.168.5.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce2 ping -c 3 192.168.5.2"
 ```
 
 Expected result: **100% packet loss** for BETA VRF (request timeout).

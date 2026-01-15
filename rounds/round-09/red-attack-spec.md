@@ -28,7 +28,7 @@ write memory
 
 Connect to RR1 via:
 ```bash
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-rr1 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-rr1 Cli -c 'configure terminal
 router bgp 65000
 neighbor PE-CLIENTS next-hop-unchanged
 no neighbor PE-CLIENTS next-hop-self
@@ -42,13 +42,13 @@ write memory'"
 After attack, verify next-hop issues:
 ```bash
 # Check RR BGP configuration
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-rr1 Cli -c 'show running-config section bgp'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-rr1 Cli -c 'show running-config section bgp'"
 
 # Check BGP routes and next-hops on PE
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'show ip bgp'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'show ip bgp'"
 
 # Verify connectivity issues
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 192.168.4.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 192.168.4.2"
 ```
 
 Expected result: **Routes visible in BGP but traffic black-holing** due to unreachable next-hops.

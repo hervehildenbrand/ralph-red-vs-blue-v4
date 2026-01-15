@@ -50,7 +50,7 @@ write memory
 Connect to each PE via:
 ```bash
 # PE1 - ALPHA corruption
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'configure terminal
 vrf instance ALPHA
 no route-target export 65000:100
 route-target export 65000:999
@@ -59,7 +59,7 @@ end
 write memory'"
 
 # PE2 - BETA corruption (adds wrong import)
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe2 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe2 Cli -c 'configure terminal
 vrf instance BETA
 route-target import 65000:999
 exit
@@ -67,7 +67,7 @@ end
 write memory'"
 
 # PE3 - GAMMA corruption
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe3 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe3 Cli -c 'configure terminal
 vrf instance GAMMA
 no route-target export 65000:300
 route-target export 65000:888
@@ -81,13 +81,13 @@ write memory'"
 After attack, verify ALL VRFs are broken:
 ```bash
 # VRF ALPHA - should fail
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 192.168.4.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 192.168.4.2"
 
 # VRF BETA - should fail
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce2 ping -c 3 192.168.5.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce2 ping -c 3 192.168.5.2"
 
 # VRF GAMMA - should fail
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce3 ping -c 3 192.168.6.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce3 ping -c 3 192.168.6.2"
 ```
 
 Expected result: **100% packet loss** on ALL VRFs.

@@ -6,8 +6,10 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Logs
+# Logs (may contain execution traces)
 *.log.bak
+ralph-red/logs/
+ralph-blue/logs/
 
 # Temporary files
 *.tmp
@@ -16,3 +18,7 @@ Thumbs.db
 # ContainerLab artifacts (if copied locally)
 clab-*/
 *.clab.yml.bak
+
+# Status and progress files (contain runtime state)
+*/status.json
+*/progress.json

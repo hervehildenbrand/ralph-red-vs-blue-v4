@@ -34,7 +34,7 @@ write memory
 
 Connect to PE1 via:
 ```bash
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'configure terminal
 no route-map CE1-IN
 route-map CE1-IN deny 5
 exit
@@ -54,13 +54,13 @@ write memory'"
 After attack, verify ALPHA VRF routes are rejected:
 ```bash
 # Check route-map
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'show route-map CE1-IN'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'show route-map CE1-IN'"
 
 # Verify ALPHA VRF broken
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 192.168.4.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 192.168.4.2"
 
 # Check BGP routes in VRF
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'show ip bgp vrf ALPHA summary'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'show ip bgp vrf ALPHA summary'"
 ```
 
 Expected result: **100% packet loss** for ALPHA VRF.

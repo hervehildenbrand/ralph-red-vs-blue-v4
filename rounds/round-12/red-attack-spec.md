@@ -48,7 +48,7 @@ write memory
 Connect to P1, P2, and P3 via:
 ```bash
 # P1 - Decoy metric change
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-p1 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-p1 Cli -c 'configure terminal
 interface Ethernet1
 isis metric 50
 exit
@@ -56,7 +56,7 @@ end
 write memory'"
 
 # P2 - Decoy metric change
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-p2 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-p2 Cli -c 'configure terminal
 interface Ethernet2
 isis metric 50
 exit
@@ -64,7 +64,7 @@ end
 write memory'"
 
 # P3 - Real attack with max metric
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-p3 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-p3 Cli -c 'configure terminal
 interface Ethernet3
 isis metric 16777214
 exit
@@ -77,12 +77,12 @@ write memory'"
 After attack, verify suboptimal routing:
 ```bash
 # Check ISIS metrics on all P routers
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-p1 Cli -c 'show isis interface'"
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-p2 Cli -c 'show isis interface'"
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-p3 Cli -c 'show isis interface'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-p1 Cli -c 'show isis interface'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-p2 Cli -c 'show isis interface'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-p3 Cli -c 'show isis interface'"
 
 # Verify connectivity issues
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 192.168.4.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 192.168.4.2"
 ```
 
 Expected result: **Suboptimal routing** with P3 interface essentially unusable.

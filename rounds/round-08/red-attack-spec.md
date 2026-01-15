@@ -27,7 +27,7 @@ write memory
 
 Connect to PE1 via:
 ```bash
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'configure terminal
 vrf instance ALPHA
 route-target export 65000:200
 exit
@@ -40,13 +40,13 @@ write memory'"
 After attack, verify route leak:
 ```bash
 # Check ALPHA VRF route-targets
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'show vrf ALPHA'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe1 Cli -c 'show vrf ALPHA'"
 
 # Check if ALPHA routes appear in BETA
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-pe2 Cli -c 'show ip route vrf BETA'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-pe2 Cli -c 'show ip route vrf BETA'"
 
 # Verify BETA VRF has unexpected routes
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce2 ping -c 3 192.168.5.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce2 ping -c 3 192.168.5.2"
 ```
 
 Expected result: **BETA customer seeing unexpected ALPHA routes**, potential connectivity issues.

@@ -7,7 +7,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 BASELINE_DIR="$PROJECT_DIR/topology/configs/baseline"
-REMOTE_HOST="hhildenbrand@192.168.1.12"
+REMOTE_HOST="labuser@<server-ip>"
 LAB_NAME="red-vs-blue-v3"
 
 # Colors for output

@@ -27,7 +27,7 @@ write memory
 
 Connect to P2 via:
 ```bash
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-p2 Cli -c 'configure terminal
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-p2 Cli -c 'configure terminal
 interface Ethernet3
 mtu 1400
 exit
@@ -40,13 +40,13 @@ write memory'"
 After attack, verify MTU black hole:
 ```bash
 # Check MTU on interface
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-p2 Cli -c 'show interfaces Ethernet3 | include MTU'"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-p2 Cli -c 'show interfaces Ethernet3 | include MTU'"
 
 # Small packets should work
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 -s 64 192.168.4.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 -s 64 192.168.4.2"
 
 # Large packets may fail
-ssh hhildenbrand@192.168.1.12 "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 -s 1400 192.168.4.2"
+ssh labuser@<server-ip> "docker exec clab-red-vs-blue-v3-ce1 ping -c 3 -s 1400 192.168.4.2"
 ```
 
 Expected result: **Small packets work, large packets fail** through paths using P2.
