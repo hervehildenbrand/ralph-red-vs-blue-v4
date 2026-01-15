@@ -858,7 +858,7 @@
                                     <div class="fill blue" style="width: 80%;"></div>
                                 </div>
                             </div>
-                            <span class="category-count">4</span>
+                            <span class="category-count">3</span>
                         </div>
                         <div class="category-item">
                             <span class="category-name">Misdirection</span>
@@ -1591,8 +1591,8 @@ VRF Mapping:
                     <tbody>
                         <tr>
                             <td style="color: var(--accent-purple);">Multi-Layer</td>
-                            <td>4</td>
-                            <td>Triple-Layer, Cross-VRF, Route Leak, Policy+Decoy</td>
+                            <td>3</td>
+                            <td>Triple-Layer, Cross-VRF Route Leak, Policy+Decoy</td>
                         </tr>
                         <tr>
                             <td style="color: var(--accent-orange);">Misdirection</td>
@@ -1668,168 +1668,61 @@ VRF Mapping:
 
                 <div class="two-columns" style="margin-top: 25px;">
                     <div>
-                        <h3 style="margin-bottom: 15px; color: var(--accent-red);">Red Team GAIT Commits</h3>
+                        <h3 style="margin-bottom: 15px; color: var(--accent-red);">Red Team Actions</h3>
                         <div style="max-height: 400px; overflow-y: auto; background: var(--bg-primary); border-radius: 8px; padding: 15px;">
                             <table style="font-size: 0.85rem;">
                                 <thead>
                                     <tr>
-                                        <th>Hash</th>
-                                        <th>Message</th>
-                                        <th>Time</th>
+                                        <th>Round</th>
+                                        <th>Attack</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><code style="color: var(--accent-yellow);">db2c1d1</code></td>
-                                        <td>gait: Loop #2 - completed</td>
-                                        <td>09:18</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code style="color: var(--accent-yellow);">26bc34f</code></td>
-                                        <td>gait: Loop #1 - completed</td>
-                                        <td>09:17</td>
-                                    </tr>
-                                    <tr style="background: rgba(248, 81, 73, 0.1);">
-                                        <td><code style="color: var(--accent-red);">dfdda23</code></td>
-                                        <td><strong>attack: ML-E4 RR Policy + Decoy (R15)</strong></td>
-                                        <td>09:17</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code style="color: var(--accent-yellow);">e981bd3</code></td>
-                                        <td>gait: Loop #1 - completed</td>
-                                        <td>09:09</td>
-                                    </tr>
-                                    <tr style="background: rgba(248, 81, 73, 0.1);">
-                                        <td><code style="color: var(--accent-red);">e39ab64</code></td>
-                                        <td><strong>attack: VRF-E4 RT Import Removal (R14)</strong></td>
-                                        <td>09:09</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code style="color: var(--accent-yellow);">1adbb52</code></td>
-                                        <td>gait: Loop #1 - completed</td>
-                                        <td>09:01</td>
-                                    </tr>
-                                    <tr style="background: rgba(248, 81, 73, 0.1);">
-                                        <td><code style="color: var(--accent-red);">a0446b6</code></td>
-                                        <td><strong>attack: SR-E6 Anycast SID Conflict (R13)</strong></td>
-                                        <td>09:00</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code style="color: var(--accent-yellow);">0b596cd</code></td>
-                                        <td>gait: Loop #1 - completed</td>
-                                        <td>08:53</td>
-                                    </tr>
-                                    <tr style="background: rgba(248, 81, 73, 0.1);">
-                                        <td><code style="color: var(--accent-red);">2ffecec</code></td>
-                                        <td><strong>attack: MIS-E3 Metric Maze (R12)</strong></td>
-                                        <td>08:53</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code style="color: var(--accent-yellow);">87cf6d2</code></td>
-                                        <td>gait: Loop #1 - completed</td>
-                                        <td>08:45</td>
-                                    </tr>
-                                    <tr style="background: rgba(248, 81, 73, 0.1);">
-                                        <td><code style="color: var(--accent-red);">f7bc2c7</code></td>
-                                        <td><strong>attack: INT-E6 ISIS Metric Oscillation (R11)</strong></td>
-                                        <td>08:44</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code style="color: var(--accent-yellow);">1826d5f</code></td>
-                                        <td>gait: Loop #1 - completed</td>
-                                        <td>08:37</td>
-                                    </tr>
-                                    <tr style="background: rgba(248, 81, 73, 0.1);">
-                                        <td><code style="color: var(--accent-red);">3426244</code></td>
-                                        <td><strong>attack: POL-E3 BGP Policy Inversion (R10)</strong></td>
-                                        <td>08:37</td>
-                                    </tr>
+                                    <tr style="background: rgba(248, 81, 73, 0.1);"><td>15</td><td><strong>ML-E4 RR Policy + Decoy (FINAL BOSS)</strong></td></tr>
+                                    <tr><td>14</td><td>VRF-E4 RT Import Removal</td></tr>
+                                    <tr style="background: rgba(248, 81, 73, 0.1);"><td>13</td><td><strong>SR-E6 Anycast SID Conflict</strong></td></tr>
+                                    <tr><td>12</td><td>MIS-E3 Metric Maze</td></tr>
+                                    <tr style="background: rgba(248, 81, 73, 0.1);"><td>11</td><td><strong>INT-E6 ISIS Metric Oscillation</strong></td></tr>
+                                    <tr><td>10</td><td>POL-E3 BGP Policy Inversion</td></tr>
+                                    <tr style="background: rgba(248, 81, 73, 0.1);"><td>9</td><td><strong>TE-E5 Next-Hop-Self on RR</strong></td></tr>
+                                    <tr><td>8</td><td>ML-E5 Cross-VRF Route Leak</td></tr>
+                                    <tr style="background: rgba(248, 81, 73, 0.1);"><td>7</td><td><strong>MIS-E5 Community Strip</strong></td></tr>
+                                    <tr><td>6</td><td>POL-E2 Route-Map Sequence</td></tr>
+                                    <tr style="background: rgba(248, 81, 73, 0.1);"><td>5</td><td><strong>XV-E6 Multi-VRF Cascade</strong></td></tr>
+                                    <tr><td>4</td><td>INT-E4 MTU Black Hole</td></tr>
+                                    <tr style="background: rgba(248, 81, 73, 0.1);"><td>3</td><td><strong>SR-E2 SRGB Mismatch</strong></td></tr>
+                                    <tr><td>2</td><td>MIS-E4 One-Way ACL</td></tr>
+                                    <tr style="background: rgba(248, 81, 73, 0.1);"><td>1</td><td><strong>ML-E6 Triple-Layer Attack</strong></td></tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <div>
-                        <h3 style="margin-bottom: 15px; color: var(--accent-blue);">Blue Team GAIT Commits</h3>
+                        <h3 style="margin-bottom: 15px; color: var(--accent-blue);">Blue Team Fixes</h3>
                         <div style="max-height: 400px; overflow-y: auto; background: var(--bg-primary); border-radius: 8px; padding: 15px;">
                             <table style="font-size: 0.85rem;">
                                 <thead>
                                     <tr>
-                                        <th>Hash</th>
-                                        <th>Message</th>
-                                        <th>Time</th>
+                                        <th>Round</th>
+                                        <th>Resolution</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><code style="color: var(--accent-cyan);">668232a</code></td>
-                                        <td>gait: Loop #2 - completed</td>
-                                        <td>09:22</td>
-                                    </tr>
-                                    <tr style="background: rgba(88, 166, 255, 0.1);">
-                                        <td><code style="color: var(--accent-blue);">f9da07d</code></td>
-                                        <td><strong>fix: NOC-V4-015 - removed RR-BLOCK-IN</strong></td>
-                                        <td>09:21</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code style="color: var(--accent-cyan);">31b2d36</code></td>
-                                        <td>gait: Loop #1 - completed</td>
-                                        <td>09:13</td>
-                                    </tr>
-                                    <tr style="background: rgba(88, 166, 255, 0.1);">
-                                        <td><code style="color: var(--accent-blue);">4a00dcd</code></td>
-                                        <td><strong>fix: NOC-V4-014 - added missing RT import</strong></td>
-                                        <td>09:13</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code style="color: var(--accent-cyan);">aeb9930</code></td>
-                                        <td>gait: Loop #1 - completed</td>
-                                        <td>09:05</td>
-                                    </tr>
-                                    <tr style="background: rgba(88, 166, 255, 0.1);">
-                                        <td><code style="color: var(--accent-blue);">e66f50d</code></td>
-                                        <td><strong>fix: NOC-V4-013 - removed duplicate SID</strong></td>
-                                        <td>09:05</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code style="color: var(--accent-cyan);">22e77fd</code></td>
-                                        <td>gait: Loop #1 - completed</td>
-                                        <td>08:57</td>
-                                    </tr>
-                                    <tr style="background: rgba(88, 166, 255, 0.1);">
-                                        <td><code style="color: var(--accent-blue);">f7e6e34</code></td>
-                                        <td><strong>complete: NOC-V4-012 - fixed P3 max-metric</strong></td>
-                                        <td>08:56</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code style="color: var(--accent-cyan);">7b22e5b</code></td>
-                                        <td>gait: Loop #1 - completed</td>
-                                        <td>08:49</td>
-                                    </tr>
-                                    <tr style="background: rgba(88, 166, 255, 0.1);">
-                                        <td><code style="color: var(--accent-blue);">36ffd8f</code></td>
-                                        <td><strong>complete: NOC-V4-011 - normalized ISIS metrics</strong></td>
-                                        <td>08:49</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code style="color: var(--accent-cyan);">d853c45</code></td>
-                                        <td>gait: Loop #1 - completed</td>
-                                        <td>08:41</td>
-                                    </tr>
-                                    <tr style="background: rgba(88, 166, 255, 0.1);">
-                                        <td><code style="color: var(--accent-blue);">8739291</code></td>
-                                        <td><strong>complete: NOC-V4-010 - removed broken route-map</strong></td>
-                                        <td>08:40</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code style="color: var(--accent-cyan);">4b3ff8e</code></td>
-                                        <td>gait: Loop #1 - completed</td>
-                                        <td>08:33</td>
-                                    </tr>
-                                    <tr style="background: rgba(88, 166, 255, 0.1);">
-                                        <td><code style="color: var(--accent-blue);">16ab43a</code></td>
-                                        <td><strong>complete: NOC-V4-009 - removed next-hop-self</strong></td>
-                                        <td>08:33</td>
-                                    </tr>
+                                    <tr style="background: rgba(88, 166, 255, 0.1);"><td>15</td><td><strong>Removed RR-BLOCK-IN route-map</strong></td></tr>
+                                    <tr><td>14</td><td>Restored RT import 65000:200</td></tr>
+                                    <tr style="background: rgba(88, 166, 255, 0.1);"><td>13</td><td><strong>Removed duplicate SID from PE2</strong></td></tr>
+                                    <tr><td>12</td><td>Fixed P3 max-metric (ignored decoys)</td></tr>
+                                    <tr style="background: rgba(88, 166, 255, 0.1);"><td>11</td><td><strong>Normalized ISIS metrics on P1/P3</strong></td></tr>
+                                    <tr><td>10</td><td>Removed inverted route-map</td></tr>
+                                    <tr style="background: rgba(88, 166, 255, 0.1);"><td>9</td><td><strong>Restored next-hop-self on RRs</strong></td></tr>
+                                    <tr><td>8</td><td>Removed leaked RT export</td></tr>
+                                    <tr style="background: rgba(88, 166, 255, 0.1);"><td>7</td><td><strong>Restored community settings</strong></td></tr>
+                                    <tr><td>6</td><td>Fixed route-map sequence</td></tr>
+                                    <tr style="background: rgba(88, 166, 255, 0.1);"><td>5</td><td><strong>Restored all 3 VRF RTs</strong></td></tr>
+                                    <tr><td>4</td><td>Restored MTU to 9214</td></tr>
+                                    <tr style="background: rgba(88, 166, 255, 0.1);"><td>3</td><td><strong>DRAW - No connectivity break</strong></td></tr>
+                                    <tr><td>2</td><td>Removed asymmetric ACL</td></tr>
+                                    <tr style="background: rgba(88, 166, 255, 0.1);"><td>1</td><td><strong>Fixed ISIS + SID + BGP communities</strong></td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -1952,7 +1845,7 @@ ralph-blue/
             <p style="margin-top: 10px;">Framework: RALPH (Rapid Autonomous Lab Protocol Handler) + GAIT (Git-Aware Iterative Tasking)</p>
             <p style="margin-top: 10px; font-size: 0.9rem;">Generated: January 15, 2026</p>
             <p style="margin-top: 5px; font-size: 0.8rem; color: var(--text-muted);">
-                Repository: 369 files | 28,314 lines | ~80 GAIT commits | 245 evidence files
+                Repository: 280 files | 25K lines | 15 rounds | 245 evidence files
             </p>
         </footer>
     </div>
