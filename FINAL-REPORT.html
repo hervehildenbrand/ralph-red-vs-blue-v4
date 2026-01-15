@@ -1315,11 +1315,326 @@ VRF Mapping:
             </div>
         </div>
 
+        <!-- Git/GAIT Information -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="icon">📦</span> Git & GAIT Tracking</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="value">369</div>
+                        <div class="label">Files in Repo</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value">245</div>
+                        <div class="label">Evidence Files</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value">28K</div>
+                        <div class="label">Lines of Code</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value">~80</div>
+                        <div class="label">GAIT Commits</div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 25px;">Branch Information</h3>
+                <div class="code-block">
+<span style="color: var(--accent-green);">* red-round-01-triple-layer</span>  e23a59f  docs: Add extensive HTML report with full challenge results
+  master                      c17f236  plan: Initialize Ralph Red vs Blue v4 - CCIE+ Expert Challenge
+                </div>
+
+                <div class="two-columns" style="margin-top: 25px;">
+                    <div>
+                        <h3 style="margin-bottom: 15px; color: var(--accent-red);">Red Team GAIT Commits</h3>
+                        <div style="max-height: 400px; overflow-y: auto; background: var(--bg-primary); border-radius: 8px; padding: 15px;">
+                            <table style="font-size: 0.85rem;">
+                                <thead>
+                                    <tr>
+                                        <th>Hash</th>
+                                        <th>Message</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code style="color: var(--accent-yellow);">db2c1d1</code></td>
+                                        <td>gait: Loop #2 - completed</td>
+                                        <td>09:18</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="color: var(--accent-yellow);">26bc34f</code></td>
+                                        <td>gait: Loop #1 - completed</td>
+                                        <td>09:17</td>
+                                    </tr>
+                                    <tr style="background: rgba(248, 81, 73, 0.1);">
+                                        <td><code style="color: var(--accent-red);">dfdda23</code></td>
+                                        <td><strong>attack: ML-E4 RR Policy + Decoy (R15)</strong></td>
+                                        <td>09:17</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="color: var(--accent-yellow);">e981bd3</code></td>
+                                        <td>gait: Loop #1 - completed</td>
+                                        <td>09:09</td>
+                                    </tr>
+                                    <tr style="background: rgba(248, 81, 73, 0.1);">
+                                        <td><code style="color: var(--accent-red);">e39ab64</code></td>
+                                        <td><strong>attack: VRF-E4 RT Import Removal (R14)</strong></td>
+                                        <td>09:09</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="color: var(--accent-yellow);">1adbb52</code></td>
+                                        <td>gait: Loop #1 - completed</td>
+                                        <td>09:01</td>
+                                    </tr>
+                                    <tr style="background: rgba(248, 81, 73, 0.1);">
+                                        <td><code style="color: var(--accent-red);">a0446b6</code></td>
+                                        <td><strong>attack: SR-E6 Anycast SID Conflict (R13)</strong></td>
+                                        <td>09:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="color: var(--accent-yellow);">0b596cd</code></td>
+                                        <td>gait: Loop #1 - completed</td>
+                                        <td>08:53</td>
+                                    </tr>
+                                    <tr style="background: rgba(248, 81, 73, 0.1);">
+                                        <td><code style="color: var(--accent-red);">2ffecec</code></td>
+                                        <td><strong>attack: MIS-E3 Metric Maze (R12)</strong></td>
+                                        <td>08:53</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="color: var(--accent-yellow);">87cf6d2</code></td>
+                                        <td>gait: Loop #1 - completed</td>
+                                        <td>08:45</td>
+                                    </tr>
+                                    <tr style="background: rgba(248, 81, 73, 0.1);">
+                                        <td><code style="color: var(--accent-red);">f7bc2c7</code></td>
+                                        <td><strong>attack: INT-E6 ISIS Metric Oscillation (R11)</strong></td>
+                                        <td>08:44</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="color: var(--accent-yellow);">1826d5f</code></td>
+                                        <td>gait: Loop #1 - completed</td>
+                                        <td>08:37</td>
+                                    </tr>
+                                    <tr style="background: rgba(248, 81, 73, 0.1);">
+                                        <td><code style="color: var(--accent-red);">3426244</code></td>
+                                        <td><strong>attack: POL-E3 BGP Policy Inversion (R10)</strong></td>
+                                        <td>08:37</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="margin-bottom: 15px; color: var(--accent-blue);">Blue Team GAIT Commits</h3>
+                        <div style="max-height: 400px; overflow-y: auto; background: var(--bg-primary); border-radius: 8px; padding: 15px;">
+                            <table style="font-size: 0.85rem;">
+                                <thead>
+                                    <tr>
+                                        <th>Hash</th>
+                                        <th>Message</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code style="color: var(--accent-cyan);">668232a</code></td>
+                                        <td>gait: Loop #2 - completed</td>
+                                        <td>09:22</td>
+                                    </tr>
+                                    <tr style="background: rgba(88, 166, 255, 0.1);">
+                                        <td><code style="color: var(--accent-blue);">f9da07d</code></td>
+                                        <td><strong>fix: NOC-V4-015 - removed RR-BLOCK-IN</strong></td>
+                                        <td>09:21</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="color: var(--accent-cyan);">31b2d36</code></td>
+                                        <td>gait: Loop #1 - completed</td>
+                                        <td>09:13</td>
+                                    </tr>
+                                    <tr style="background: rgba(88, 166, 255, 0.1);">
+                                        <td><code style="color: var(--accent-blue);">4a00dcd</code></td>
+                                        <td><strong>fix: NOC-V4-014 - added missing RT import</strong></td>
+                                        <td>09:13</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="color: var(--accent-cyan);">aeb9930</code></td>
+                                        <td>gait: Loop #1 - completed</td>
+                                        <td>09:05</td>
+                                    </tr>
+                                    <tr style="background: rgba(88, 166, 255, 0.1);">
+                                        <td><code style="color: var(--accent-blue);">e66f50d</code></td>
+                                        <td><strong>fix: NOC-V4-013 - removed duplicate SID</strong></td>
+                                        <td>09:05</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="color: var(--accent-cyan);">22e77fd</code></td>
+                                        <td>gait: Loop #1 - completed</td>
+                                        <td>08:57</td>
+                                    </tr>
+                                    <tr style="background: rgba(88, 166, 255, 0.1);">
+                                        <td><code style="color: var(--accent-blue);">f7e6e34</code></td>
+                                        <td><strong>complete: NOC-V4-012 - fixed P3 max-metric</strong></td>
+                                        <td>08:56</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="color: var(--accent-cyan);">7b22e5b</code></td>
+                                        <td>gait: Loop #1 - completed</td>
+                                        <td>08:49</td>
+                                    </tr>
+                                    <tr style="background: rgba(88, 166, 255, 0.1);">
+                                        <td><code style="color: var(--accent-blue);">36ffd8f</code></td>
+                                        <td><strong>complete: NOC-V4-011 - normalized ISIS metrics</strong></td>
+                                        <td>08:49</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="color: var(--accent-cyan);">d853c45</code></td>
+                                        <td>gait: Loop #1 - completed</td>
+                                        <td>08:41</td>
+                                    </tr>
+                                    <tr style="background: rgba(88, 166, 255, 0.1);">
+                                        <td><code style="color: var(--accent-blue);">8739291</code></td>
+                                        <td><strong>complete: NOC-V4-010 - removed broken route-map</strong></td>
+                                        <td>08:40</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code style="color: var(--accent-cyan);">4b3ff8e</code></td>
+                                        <td>gait: Loop #1 - completed</td>
+                                        <td>08:33</td>
+                                    </tr>
+                                    <tr style="background: rgba(88, 166, 255, 0.1);">
+                                        <td><code style="color: var(--accent-blue);">16ab43a</code></td>
+                                        <td><strong>complete: NOC-V4-009 - removed next-hop-self</strong></td>
+                                        <td>08:33</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 25px;">Commit Types Distribution</h3>
+                <div class="two-columns">
+                    <div>
+                        <div class="category-item">
+                            <span class="category-name" style="color: var(--accent-yellow);">gait:</span>
+                            <div class="category-bar">
+                                <div class="progress-bar">
+                                    <div class="fill" style="width: 100%; background: var(--accent-yellow);"></div>
+                                </div>
+                            </div>
+                            <span class="category-count">~60</span>
+                        </div>
+                        <div class="category-item">
+                            <span class="category-name" style="color: var(--accent-red);">attack:</span>
+                            <div class="category-bar">
+                                <div class="progress-bar">
+                                    <div class="fill" style="width: 25%; background: var(--accent-red);"></div>
+                                </div>
+                            </div>
+                            <span class="category-count">15</span>
+                        </div>
+                        <div class="category-item">
+                            <span class="category-name" style="color: var(--accent-blue);">fix:</span>
+                            <div class="category-bar">
+                                <div class="progress-bar">
+                                    <div class="fill" style="width: 25%; background: var(--accent-blue);"></div>
+                                </div>
+                            </div>
+                            <span class="category-count">14</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="category-item">
+                            <span class="category-name" style="color: var(--accent-green);">complete:</span>
+                            <div class="category-bar">
+                                <div class="progress-bar">
+                                    <div class="fill" style="width: 10%; background: var(--accent-green);"></div>
+                                </div>
+                            </div>
+                            <span class="category-count">3</span>
+                        </div>
+                        <div class="category-item">
+                            <span class="category-name" style="color: var(--accent-purple);">plan:</span>
+                            <div class="category-bar">
+                                <div class="progress-bar">
+                                    <div class="fill" style="width: 5%; background: var(--accent-purple);"></div>
+                                </div>
+                            </div>
+                            <span class="category-count">2</span>
+                        </div>
+                        <div class="category-item">
+                            <span class="category-name" style="color: var(--accent-cyan);">baseline:</span>
+                            <div class="category-bar">
+                                <div class="progress-bar">
+                                    <div class="fill" style="width: 2%; background: var(--accent-cyan);"></div>
+                                </div>
+                            </div>
+                            <span class="category-count">1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 25px;">
+                    <h3>GAIT (Git-Aware Iterative Tasking) Compliance</h3>
+                    <p style="margin-top: 10px;">Every action by both Red and Blue teams was tracked with git commits following the GAIT protocol:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>plan:</strong> - Initial planning and attack strategy documentation</li>
+                        <li><strong>baseline:</strong> - Pre-attack state verification</li>
+                        <li><strong>attack:</strong> - Red team attack execution</li>
+                        <li><strong>fix:</strong> - Blue team remediation actions</li>
+                        <li><strong>complete:</strong> - Round completion verification</li>
+                        <li><strong>gait:</strong> - Autonomous loop iteration tracking</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 25px;">Evidence Directory Structure</h3>
+                <div class="code-block" style="font-size: 0.8rem;">
+rounds/
+├── round-01/
+│   ├── evidence/
+│   │   ├── baseline-state/
+│   │   │   └── connectivity.txt
+│   │   ├── post-attack-state/
+│   │   │   └── connectivity.txt
+│   │   └── post-fix-state/
+│   │       └── connectivity.txt
+│   ├── red-attack.log
+│   ├── blue-diagnosis.log
+│   └── summary.md
+├── round-02/
+│   └── ... (same structure)
+...
+└── round-15/
+    └── ... (same structure)
+
+ralph-red/
+├── PROMPT.md          # Attack specifications
+├── logs/              # Execution logs
+│   └── claude_output_*.log
+└── status.json        # RALPH state
+
+ralph-blue/
+├── PROMPT.md          # NOC tickets
+├── logs/              # Diagnosis logs
+│   └── claude_output_*.log
+└── status.json        # RALPH state
+                </div>
+            </div>
+        </div>
+
         <!-- Footer -->
         <footer class="footer">
             <p><strong>Ralph Red vs Blue v4</strong> - CCIE+ Expert Chaos Engineering Challenge</p>
             <p style="margin-top: 10px;">Framework: RALPH (Rapid Autonomous Lab Protocol Handler) + GAIT (Git-Aware Iterative Tasking)</p>
             <p style="margin-top: 10px; font-size: 0.9rem;">Generated: January 15, 2026</p>
+            <p style="margin-top: 5px; font-size: 0.8rem; color: var(--text-muted);">
+                Repository: 369 files | 28,314 lines | ~80 GAIT commits | 245 evidence files
+            </p>
         </footer>
     </div>
 
