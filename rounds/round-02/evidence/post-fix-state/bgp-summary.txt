@@ -1,0 +1,62 @@
+# BGP Summary - Round 2 - post-fix
+# Timestamp: 2026-01-15T06:02:17Z
+
+=== pe1 ===
+BGP summary information for VRF default
+Router identifier 10.0.0.21, local AS number 65000
+Neighbor          AS Session State AFI/SAFI                AFI/SAFI State   NLRI Rcd   NLRI Acc   NLRI Adv
+-------- ----------- ------------- ----------------------- -------------- ---------- ---------- ----------
+10.0.0.1       65000 Established   IPv4 MplsVpn            Negotiated              5          5          1
+10.0.0.1       65000 Established   IPv6 MplsVpn            Negotiated              0          0          0
+10.0.0.2       65000 Established   IPv4 MplsVpn            Negotiated              5          5          1
+10.0.0.2       65000 Established   IPv6 MplsVpn            Negotiated              0          0          0
+
+=== pe2 ===
+BGP summary information for VRF default
+Router identifier 10.0.0.22, local AS number 65000
+Neighbor          AS Session State AFI/SAFI                AFI/SAFI State   NLRI Rcd   NLRI Acc   NLRI Adv
+-------- ----------- ------------- ----------------------- -------------- ---------- ---------- ----------
+10.0.0.1       65000 Established   IPv4 MplsVpn            Negotiated              5          5          1
+10.0.0.1       65000 Established   IPv6 MplsVpn            Negotiated              0          0          0
+10.0.0.2       65000 Established   IPv4 MplsVpn            Negotiated              5          5          1
+10.0.0.2       65000 Established   IPv6 MplsVpn            Negotiated              0          0          0
+
+=== pe3 ===
+BGP summary information for VRF default
+Router identifier 10.0.0.23, local AS number 65000
+Neighbor          AS Session State AFI/SAFI                AFI/SAFI State   NLRI Rcd   NLRI Acc   NLRI Adv
+-------- ----------- ------------- ----------------------- -------------- ---------- ---------- ----------
+10.0.0.1       65000 Established   IPv4 MplsVpn            Negotiated              5          5          1
+10.0.0.1       65000 Established   IPv6 MplsVpn            Negotiated              0          0          0
+10.0.0.2       65000 Established   IPv4 MplsVpn            Negotiated              5          5          1
+10.0.0.2       65000 Established   IPv6 MplsVpn            Negotiated              0          0          0
+
+=== pe4 ===
+BGP summary information for VRF default
+Router identifier 10.0.0.24, local AS number 65000
+Neighbor          AS Session State AFI/SAFI                AFI/SAFI State   NLRI Rcd   NLRI Acc   NLRI Adv
+-------- ----------- ------------- ----------------------- -------------- ---------- ---------- ----------
+10.0.0.1       65000 Established   IPv4 MplsVpn            Negotiated              5          5          1
+10.0.0.1       65000 Established   IPv6 MplsVpn            Negotiated              0          0          0
+10.0.0.2       65000 Established   IPv4 MplsVpn            Negotiated              5          5          1
+10.0.0.2       65000 Established   IPv6 MplsVpn            Negotiated              0          0          0
+
+=== pe5 ===
+BGP summary information for VRF default
+Router identifier 10.0.0.25, local AS number 65000
+Neighbor          AS Session State AFI/SAFI                AFI/SAFI State   NLRI Rcd   NLRI Acc   NLRI Adv
+-------- ----------- ------------- ----------------------- -------------- ---------- ---------- ----------
+10.0.0.1       65000 Established   IPv4 MplsVpn            Negotiated              5          5          1
+10.0.0.1       65000 Established   IPv6 MplsVpn            Negotiated              0          0          0
+10.0.0.2       65000 Established   IPv4 MplsVpn            Negotiated              5          5          1
+10.0.0.2       65000 Established   IPv6 MplsVpn            Negotiated              0          0          0
+
+=== pe6 ===
+BGP summary information for VRF default
+Router identifier 10.0.0.26, local AS number 65000
+Neighbor          AS Session State AFI/SAFI                AFI/SAFI State   NLRI Rcd   NLRI Acc   NLRI Adv
+-------- ----------- ------------- ----------------------- -------------- ---------- ---------- ----------
+10.0.0.1       65000 Established   IPv4 MplsVpn            Negotiated              5          5          1
+10.0.0.1       65000 Established   IPv6 MplsVpn            Negotiated              0          0          0
+10.0.0.2       65000 Established   IPv4 MplsVpn            Negotiated              5          5          1
+10.0.0.2       65000 Established   IPv6 MplsVpn            Negotiated              0          0          0
