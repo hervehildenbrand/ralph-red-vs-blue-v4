@@ -1315,6 +1315,352 @@ VRF Mapping:
             </div>
         </div>
 
+        <!-- RALPH/GAIT Architecture -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="icon">🏗️</span> RALPH/GAIT Architecture</h2>
+                <span class="toggle">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="highlight-box">
+                    <h3>Framework Overview</h3>
+                    <p><strong>RALPH</strong> (Rapid Autonomous Lab Protocol Handler) + <strong>GAIT</strong> (Git-Aware Iterative Tasking) enables fully autonomous Red and Blue teams competing in chaos engineering exercises with complete audit trails.</p>
+                </div>
+
+                <!-- Architecture Diagram -->
+                <h3 style="margin-top: 25px;">System Architecture</h3>
+                <div class="code-block" style="font-family: monospace; font-size: 0.75rem; line-height: 1.4; white-space: pre; overflow-x: auto;">
+<span style="color: var(--accent-yellow);">┌─────────────────────────────────────────────────────────────────────────────┐</span>
+<span style="color: var(--accent-yellow);">│                           REFEREE (Orchestrator)                             │</span>
+<span style="color: var(--accent-yellow);">│                                                                              │</span>
+<span style="color: var(--text-secondary);">│  1. Restores baseline between rounds    4. Captures evidence at each phase  │</span>
+<span style="color: var(--text-secondary);">│  2. Updates PROMPT.md with specs        5. Scores results                   │</span>
+<span style="color: var(--text-secondary);">│  3. Launches RALPH autonomous loops     6. Documents outcomes               │</span>
+<span style="color: var(--accent-yellow);">└─────────────────────────────────────────────────────────────────────────────┘</span>
+         │                                              │
+         │ <span style="color: var(--accent-purple);">scripts/run-round.sh</span>                         │
+         ▼                                              ▼
+<span style="color: var(--accent-red);">┌────────────────────────────┐</span>         <span style="color: var(--accent-blue);">┌────────────────────────────────────┐</span>
+<span style="color: var(--accent-red);">│       ralph-red/           │</span>         <span style="color: var(--accent-blue);">│           ralph-blue/               │</span>
+<span style="color: var(--accent-red);">│    (Autonomous Attacker)   │</span>         <span style="color: var(--accent-blue);">│      (Autonomous Defender)          │</span>
+<span style="color: var(--accent-red);">│                            │</span>         <span style="color: var(--accent-blue);">│                                      │</span>
+<span style="color: var(--accent-red);">│  ├── PROMPT.md (attack)    │</span>         <span style="color: var(--accent-blue);">│  ├── PROMPT.md (NOC ticket)         │</span>
+<span style="color: var(--accent-red);">│  ├── @AGENT.md (identity)  │</span>         <span style="color: var(--accent-blue);">│  ├── @AGENT.md (identity)           │</span>
+<span style="color: var(--accent-red);">│  ├── @fix_plan.md (tasks)  │</span> ──────► <span style="color: var(--accent-blue);">│  ├── @fix_plan.md (tasks)           │</span>
+<span style="color: var(--accent-red);">│  ├── expert-catalog.json   │</span> creates <span style="color: var(--accent-blue);">│  ├── diagnostic-playbook.md         │</span>
+<span style="color: var(--accent-red);">│  └── status.json           │</span> ticket  <span style="color: var(--accent-blue);">│  └── status.json                    │</span>
+<span style="color: var(--accent-red);">└────────────────────────────┘</span>         <span style="color: var(--accent-blue);">└────────────────────────────────────┘</span>
+         │                                              │
+         │  <span style="color: var(--accent-green);">SSH to ContainerLab</span>                         │  <span style="color: var(--accent-green);">SSH to ContainerLab</span>
+         ▼                                              ▼
+<span style="color: var(--accent-cyan);">┌─────────────────────────────────────────────────────────────────────────────┐</span>
+<span style="color: var(--accent-cyan);">│                    ContainerLab Server (192.168.1.12)                        │</span>
+<span style="color: var(--accent-cyan);">│                                                                              │</span>
+<span style="color: var(--accent-cyan);">│    ┌──────────────────────────────────────────────────────────────────┐     │</span>
+<span style="color: var(--accent-cyan);">│    │                    18 Arista cEOS 4.35.1F Nodes                   │     │</span>
+<span style="color: var(--accent-cyan);">│    │   RR: RR1, RR2  │  Core: P1-P4  │  PE: PE1-PE6  │  CE: CE1-CE6   │     │</span>
+<span style="color: var(--accent-cyan);">│    │   VRFs: ALPHA (65000:100), BETA (65000:200), GAMMA (65000:300)    │     │</span>
+<span style="color: var(--accent-cyan);">│    └──────────────────────────────────────────────────────────────────┘     │</span>
+<span style="color: var(--accent-cyan);">└─────────────────────────────────────────────────────────────────────────────┘</span>
+                </div>
+
+                <!-- Project Structure -->
+                <h3 style="margin-top: 25px;">Project Structure</h3>
+                <div class="code-block" style="font-family: monospace; font-size: 0.8rem;">
+<span style="color: var(--accent-yellow);">projects/ralph-red-vs-blue-v4/</span>
+├── <span style="color: var(--accent-red);">ralph-red/</span>                    <span style="color: var(--text-muted);"># Red Team autonomous agent</span>
+│   ├── PROMPT.md                 <span style="color: var(--text-muted);"># Per-round attack specification</span>
+│   ├── @AGENT.md                 <span style="color: var(--text-muted);"># Agent identity & instructions</span>
+│   ├── @fix_plan.md              <span style="color: var(--text-muted);"># GAIT task tracking</span>
+│   ├── expert-catalog.json       <span style="color: var(--text-muted);"># All 15 expert attacks</span>
+│   └── status.json               <span style="color: var(--text-muted);"># RALPH loop state</span>
+│
+├── <span style="color: var(--accent-blue);">ralph-blue/</span>                   <span style="color: var(--text-muted);"># Blue Team autonomous agent</span>
+│   ├── PROMPT.md                 <span style="color: var(--text-muted);"># Per-round NOC ticket</span>
+│   ├── @AGENT.md                 <span style="color: var(--text-muted);"># Agent identity & instructions</span>
+│   ├── @fix_plan.md              <span style="color: var(--text-muted);"># GAIT task tracking</span>
+│   └── diagnostic-playbook.md    <span style="color: var(--text-muted);"># Troubleshooting procedures</span>
+│
+├── <span style="color: var(--accent-purple);">rounds/</span>                       <span style="color: var(--text-muted);"># Per-round evidence</span>
+│   └── round-XX/
+│       ├── noc-ticket.md         <span style="color: var(--text-muted);"># NOC ticket for Blue</span>
+│       ├── red-attack.log        <span style="color: var(--text-muted);"># RALPH-Red execution log</span>
+│       ├── blue-diagnosis.log    <span style="color: var(--text-muted);"># RALPH-Blue execution log</span>
+│       ├── summary.md            <span style="color: var(--text-muted);"># Round results</span>
+│       └── evidence/
+│           ├── baseline-state/
+│           ├── post-attack-state/
+│           └── post-fix-state/
+│
+├── <span style="color: var(--accent-green);">scripts/</span>
+│   ├── run-round.sh              <span style="color: var(--text-muted);"># Full round orchestration</span>
+│   ├── restore-baseline.sh       <span style="color: var(--text-muted);"># Reset lab to known-good</span>
+│   └── capture-evidence.sh       <span style="color: var(--text-muted);"># Snapshot network state</span>
+│
+└── topology/ → symlink           <span style="color: var(--text-muted);"># Lab definition</span>
+                </div>
+
+                <!-- GAIT Iron Laws -->
+                <h3 style="margin-top: 25px;">GAIT Iron Laws</h3>
+                <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr);">
+                    <div class="stat-card" style="border-left: 3px solid var(--accent-red);">
+                        <div class="value" style="font-size: 1rem; color: var(--accent-red);">1</div>
+                        <div class="label" style="font-size: 0.75rem;">NO NETWORK CHANGES WITHOUT A GIT BRANCH</div>
+                    </div>
+                    <div class="stat-card" style="border-left: 3px solid var(--accent-yellow);">
+                        <div class="value" style="font-size: 1rem; color: var(--accent-yellow);">2</div>
+                        <div class="label" style="font-size: 0.75rem;">NO ACTIONS WITHOUT COMMITS</div>
+                    </div>
+                    <div class="stat-card" style="border-left: 3px solid var(--accent-blue);">
+                        <div class="value" style="font-size: 1rem; color: var(--accent-blue);">3</div>
+                        <div class="label" style="font-size: 0.75rem;">NO CHANGES WITHOUT VERIFICATION</div>
+                    </div>
+                    <div class="stat-card" style="border-left: 3px solid var(--accent-green);">
+                        <div class="value" style="font-size: 1rem; color: var(--accent-green);">4</div>
+                        <div class="label" style="font-size: 0.75rem;">NO COMPLETION WITHOUT SUMMARY</div>
+                    </div>
+                </div>
+
+                <!-- Two Column Layout -->
+                <div class="two-columns" style="margin-top: 25px;">
+                    <div>
+                        <h3 style="margin-bottom: 15px;">Agent Configuration Files</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>File</th>
+                                    <th>Purpose</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code style="color: var(--accent-cyan);">PROMPT.md</code></td>
+                                    <td>Per-round task instructions (attack spec or NOC ticket)</td>
+                                </tr>
+                                <tr>
+                                    <td><code style="color: var(--accent-cyan);">@AGENT.md</code></td>
+                                    <td>Agent identity, role, and execution instructions</td>
+                                </tr>
+                                <tr>
+                                    <td><code style="color: var(--accent-cyan);">@fix_plan.md</code></td>
+                                    <td>GAIT task tracking with checkboxes</td>
+                                </tr>
+                                <tr>
+                                    <td><code style="color: var(--accent-cyan);">status.json</code></td>
+                                    <td>RALPH loop state (calls, status, exit reason)</td>
+                                </tr>
+                                <tr>
+                                    <td><code style="color: var(--accent-cyan);">progress.json</code></td>
+                                    <td>Iteration progress for resume capability</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <h3 style="margin-bottom: 15px;">GAIT Commit Types</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Prefix</th>
+                                    <th>Purpose</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: rgba(217, 41, 34, 0.1);">
+                                    <td><code style="color: var(--accent-yellow);">gait:</code></td>
+                                    <td>RALPH loop iteration marker</td>
+                                </tr>
+                                <tr>
+                                    <td><code style="color: var(--accent-purple);">baseline:</code></td>
+                                    <td>State verification before changes</td>
+                                </tr>
+                                <tr style="background: rgba(248, 81, 73, 0.1);">
+                                    <td><code style="color: var(--accent-red);">attack:</code></td>
+                                    <td>Red team action executed</td>
+                                </tr>
+                                <tr style="background: rgba(88, 166, 255, 0.1);">
+                                    <td><code style="color: var(--accent-blue);">fix:</code></td>
+                                    <td>Blue team correction applied</td>
+                                </tr>
+                                <tr style="background: rgba(63, 185, 80, 0.1);">
+                                    <td><code style="color: var(--accent-green);">complete:</code></td>
+                                    <td>Round finished successfully</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Per-Round GAIT Flow -->
+                <h3 style="margin-top: 25px;">Per-Round GAIT Workflow</h3>
+                <div class="code-block" style="font-family: monospace; font-size: 0.8rem; line-height: 1.5;">
+<span style="color: var(--accent-yellow);">Round N Start</span>
+    │
+    ├─► <span style="color: var(--accent-purple);">git checkout -b round-N-&lt;attack-name&gt;</span>
+    │
+    ├─► <span style="color: var(--accent-red);">[RALPH-Red starts]</span>
+    │   ├─► <span style="color: var(--text-secondary);">gait: Loop #1 - starting</span>
+    │   ├─► <span style="color: var(--accent-red);">attack: &lt;action taken&gt;</span>
+    │   └─► <span style="color: var(--text-secondary);">gait: Loop #1 - EXIT_SIGNAL</span>
+    │
+    ├─► <span style="color: var(--accent-cyan);">capture-evidence.sh post-attack</span>
+    │   └─► <span style="color: var(--accent-purple);">baseline: post-attack state captured</span>
+    │
+    ├─► <span style="color: var(--accent-blue);">[RALPH-Blue starts]</span>
+    │   ├─► <span style="color: var(--text-secondary);">gait: Loop #1 - starting</span>
+    │   ├─► <span style="color: var(--accent-blue);">fix: &lt;diagnosis and fix&gt;</span>
+    │   └─► <span style="color: var(--text-secondary);">gait: Loop #1 - EXIT_SIGNAL</span>
+    │
+    ├─► <span style="color: var(--accent-cyan);">capture-evidence.sh post-fix</span>
+    │   └─► <span style="color: var(--accent-green);">complete: Round N - &lt;WINNER&gt;</span>
+    │
+    └─► <span style="color: var(--accent-yellow);">Baseline restored for next round</span>
+                </div>
+
+                <!-- Evidence Capture -->
+                <h3 style="margin-top: 25px;">Evidence Capture System</h3>
+                <div class="two-columns">
+                    <div>
+                        <h4 style="margin-bottom: 10px; color: var(--accent-cyan);">Three Phases per Round</h4>
+                        <div class="code-block" style="font-size: 0.8rem;">
+<span style="color: var(--accent-green);">./scripts/capture-evidence.sh</span> &lt;round&gt; <span style="color: var(--accent-purple);">baseline</span>     <span style="color: var(--text-muted);"># Before attack</span>
+<span style="color: var(--accent-green);">./scripts/capture-evidence.sh</span> &lt;round&gt; <span style="color: var(--accent-red);">post-attack</span>  <span style="color: var(--text-muted);"># After Red</span>
+<span style="color: var(--accent-green);">./scripts/capture-evidence.sh</span> &lt;round&gt; <span style="color: var(--accent-blue);">post-fix</span>     <span style="color: var(--text-muted);"># After Blue</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 10px; color: var(--accent-cyan);">Evidence Files Captured</h4>
+                        <table style="font-size: 0.85rem;">
+                            <tbody>
+                                <tr>
+                                    <td><code>connectivity.txt</code></td>
+                                    <td>VRF ping tests (CE→CE)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>isis-adjacencies.txt</code></td>
+                                    <td>ISIS neighbor state</td>
+                                </tr>
+                                <tr>
+                                    <td><code>bgp-summary.txt</code></td>
+                                    <td>BGP session state</td>
+                                </tr>
+                                <tr>
+                                    <td><code>mpls-lfib.txt</code></td>
+                                    <td>MPLS label tables</td>
+                                </tr>
+                                <tr>
+                                    <td><code>vrf-routes.txt</code></td>
+                                    <td>VRF routing tables</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- RALPH Loop Execution -->
+                <h3 style="margin-top: 25px;">RALPH Loop Execution</h3>
+                <div class="highlight-box" style="background: var(--bg-tertiary);">
+                    <p>Each agent runs in autonomous loop mode: <code style="color: var(--accent-green);">ralph --monitor --timeout 15</code></p>
+                </div>
+                <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 15px;">
+                    <div class="stat-card">
+                        <div class="value" style="font-size: 1rem; color: var(--accent-cyan);">Loop Mechanics</div>
+                        <div class="label" style="text-align: left; font-size: 0.75rem; line-height: 1.6;">
+                            1. Read PROMPT.md<br>
+                            2. Execute SSH commands<br>
+                            3. Log to @fix_plan.md<br>
+                            4. GAIT commit<br>
+                            5. Check EXIT_SIGNAL
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value" style="font-size: 1rem; color: var(--accent-yellow);">Exit Conditions</div>
+                        <div class="label" style="text-align: left; font-size: 0.75rem; line-height: 1.6;">
+                            • EXIT_SIGNAL: true<br>
+                            • 2+ completion indicators<br>
+                            • Timeout (10-15 min)<br>
+                            • Manual abort (Ctrl+C)
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value" style="font-size: 1rem; color: var(--accent-green);">Status Tracking</div>
+                        <div class="label" style="text-align: left; font-size: 0.75rem; line-height: 1.6;">
+                            • loop_count: iterations<br>
+                            • calls_made_this_hour<br>
+                            • last_action: graceful_exit<br>
+                            • status: completed
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Baseline Restore -->
+                <h3 style="margin-top: 25px;">Baseline Restore Process</h3>
+                <div class="code-block" style="font-size: 0.8rem;">
+<span style="color: var(--text-muted);"># Between each round, restore-baseline.sh:</span>
+<span style="color: var(--accent-yellow);">DEVICES</span>=("rr1" "rr2" "p1" "p2" "p3" "p4" "pe1" "pe2" "pe3" "pe4" "pe5" "pe6")
+
+<span style="color: var(--accent-cyan);">1.</span> Copy golden baseline configs to remote server
+<span style="color: var(--accent-cyan);">2.</span> Apply configs to all 12 cEOS devices via <span style="color: var(--accent-green);">configure replace</span>
+<span style="color: var(--accent-cyan);">3.</span> Wait 15 seconds for protocol convergence
+<span style="color: var(--accent-cyan);">4.</span> Verify all 3 VRFs pass connectivity tests
+                </div>
+
+                <!-- Expert Attack Catalog Summary -->
+                <h3 style="margin-top: 25px;">Expert Attack Catalog (expert-catalog.json)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Count</th>
+                            <th>Attack Types</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: var(--accent-purple);">Multi-Layer</td>
+                            <td>4</td>
+                            <td>Triple-Layer, Cross-VRF, Route Leak, Policy+Decoy</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-orange);">Misdirection</td>
+                            <td>3</td>
+                            <td>One-Way ACL, Metric Maze, Community Strip</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-yellow);">Policy</td>
+                            <td>3</td>
+                            <td>Route-Map Swap, RCF Inversion, BGP Policy Inversion</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-cyan);">SR-MPLS</td>
+                            <td>2</td>
+                            <td>SRGB Mismatch, Anycast SID Conflict</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-red);">Intermittent</td>
+                            <td>2</td>
+                            <td>MTU Black Hole, ISIS Metric Oscillation</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-green);">VRF/RT</td>
+                            <td>1</td>
+                            <td>Multi-VRF RT Cascade</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="highlight-box" style="margin-top: 20px; border-left: 3px solid var(--accent-red);">
+                    <h4 style="color: var(--accent-red);">Forbidden Attacks (Too Easy)</h4>
+                    <ul style="margin-left: 20px; margin-top: 10px; color: var(--text-secondary);">
+                        <li><code>interface shutdown</code> on CE-facing interfaces</li>
+                        <li><code>neighbor X.X.X.X shutdown</code> (BGP session shutdown)</li>
+                        <li><code>no redistribute connected</code></li>
+                        <li><code>no isis enable CORE</code> alone</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         <!-- Git/GAIT Information -->
         <div class="section">
             <div class="section-header" onclick="toggleSection(this)">
