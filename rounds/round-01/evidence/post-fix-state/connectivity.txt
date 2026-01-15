@@ -1,0 +1,32 @@
+# VRF Connectivity Test - Round 1 - post-fix
+# Timestamp: 2026-01-15T05:46:53Z
+
+=== VRF ALPHA (CE1 -> CE4) ===
+PING 192.168.4.2 (192.168.4.2): 56 data bytes
+64 bytes from 192.168.4.2: seq=0 ttl=62 time=2.430 ms
+64 bytes from 192.168.4.2: seq=1 ttl=62 time=2.653 ms
+64 bytes from 192.168.4.2: seq=2 ttl=62 time=2.817 ms
+
+--- 192.168.4.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 2.430/2.633/2.817 ms
+
+=== VRF BETA (CE2 -> CE5) ===
+PING 192.168.5.2 (192.168.5.2): 56 data bytes
+64 bytes from 192.168.5.2: seq=0 ttl=62 time=2.497 ms
+64 bytes from 192.168.5.2: seq=1 ttl=62 time=2.611 ms
+64 bytes from 192.168.5.2: seq=2 ttl=62 time=2.686 ms
+
+--- 192.168.5.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 2.497/2.598/2.686 ms
+
+=== VRF GAMMA (CE3 -> CE6) ===
+PING 192.168.6.2 (192.168.6.2): 56 data bytes
+64 bytes from 192.168.6.2: seq=0 ttl=62 time=2.430 ms
+64 bytes from 192.168.6.2: seq=1 ttl=62 time=2.515 ms
+64 bytes from 192.168.6.2: seq=2 ttl=62 time=2.509 ms
+
+--- 192.168.6.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 2.430/2.484/2.515 ms

@@ -1,0 +1,32 @@
+# MPLS LFIB - Round 1 - baseline
+# Timestamp: 2026-01-15T05:33:15Z
+
+=== pe1 ===
+
+> show mpls lfib
+% Incomplete command at line 1
+
+=== pe2 ===
+
+> show mpls lfib
+% Incomplete command at line 1
+
+=== pe3 ===
+
+> show mpls lfib
+% Incomplete command at line 1
+
+=== pe4 ===
+
+> show mpls lfib
+% Incomplete command at line 1
+
+=== pe5 ===
+
+> show mpls lfib
+% Incomplete command at line 1
+
+=== pe6 ===
+
+> show mpls lfib
+% Incomplete command at line 1
