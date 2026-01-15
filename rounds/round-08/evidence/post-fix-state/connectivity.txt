@@ -1,0 +1,61 @@
+=== POST-FIX VERIFICATION - Round 08 ===
+
+=== VRF ALPHA ===
+PING 192.168.4.2 (192.168.4.2): 56 data bytes
+64 bytes from 192.168.4.2: seq=0 ttl=62 time=2.363 ms
+64 bytes from 192.168.4.2: seq=1 ttl=62 time=2.721 ms
+64 bytes from 192.168.4.2: seq=2 ttl=62 time=2.670 ms
+
+--- 192.168.4.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 2.363/2.584/2.721 ms
+
+=== VRF BETA ===
+PING 192.168.5.2 (192.168.5.2): 56 data bytes
+64 bytes from 192.168.5.2: seq=0 ttl=62 time=2.492 ms
+64 bytes from 192.168.5.2: seq=1 ttl=62 time=2.670 ms
+64 bytes from 192.168.5.2: seq=2 ttl=62 time=2.588 ms
+
+--- 192.168.5.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 2.492/2.583/2.670 ms
+
+=== VRF GAMMA ===
+PING 192.168.6.2 (192.168.6.2): 56 data bytes
+64 bytes from 192.168.6.2: seq=0 ttl=62 time=2.429 ms
+64 bytes from 192.168.6.2: seq=1 ttl=62 time=2.589 ms
+64 bytes from 192.168.6.2: seq=2 ttl=62 time=2.571 ms
+
+--- 192.168.6.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 2.429/2.529/2.589 ms
+
+=== BETA VRF Routes on PE2 (should not show 192.168.1.0/24) ===
+
+VRF: BETA
+Source Codes:
+       C - connected, S - static, K - kernel,
+       O - OSPF, O IA - OSPF inter area, O E1 - OSPF external type 1,
+       O E2 - OSPF external type 2, O N1 - OSPF NSSA external type 1,
+       O N2 - OSPF NSSA external type2, O3 - OSPFv3,
+       O3 IA - OSPFv3 inter area, O3 E1 - OSPFv3 external type 1,
+       O3 E2 - OSPFv3 external type 2,
+       O3 N1 - OSPFv3 NSSA external type 1,
+       O3 N2 - OSPFv3 NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route,
+       CL - CBF Leaked Route
+
+Gateway of last resort is not set
+
+ C        192.168.2.0/24
+           directly connected, Ethernet3
+ B I      192.168.5.0/24 [200/0]
+           via 10.0.0.25/32, IS-IS SR tunnel index 8, label 116384
+              via 10.3.2.0, Ethernet1, label 900025
+

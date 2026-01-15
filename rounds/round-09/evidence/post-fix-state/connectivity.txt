@@ -1,0 +1,31 @@
+=== POST-FIX VERIFICATION - Round 09 ===
+
+=== VRF ALPHA ===
+PING 192.168.4.2 (192.168.4.2): 56 data bytes
+64 bytes from 192.168.4.2: seq=0 ttl=62 time=2.402 ms
+64 bytes from 192.168.4.2: seq=1 ttl=62 time=2.431 ms
+64 bytes from 192.168.4.2: seq=2 ttl=62 time=2.515 ms
+
+--- 192.168.4.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 2.402/2.449/2.515 ms
+
+=== VRF BETA ===
+PING 192.168.5.2 (192.168.5.2): 56 data bytes
+64 bytes from 192.168.5.2: seq=0 ttl=62 time=2.370 ms
+64 bytes from 192.168.5.2: seq=1 ttl=62 time=2.707 ms
+64 bytes from 192.168.5.2: seq=2 ttl=62 time=2.551 ms
+
+--- 192.168.5.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 2.370/2.542/2.707 ms
+
+=== VRF GAMMA ===
+PING 192.168.6.2 (192.168.6.2): 56 data bytes
+64 bytes from 192.168.6.2: seq=0 ttl=62 time=2.478 ms
+64 bytes from 192.168.6.2: seq=1 ttl=62 time=2.593 ms
+64 bytes from 192.168.6.2: seq=2 ttl=62 time=2.674 ms
+
+--- 192.168.6.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 2.478/2.581/2.674 ms

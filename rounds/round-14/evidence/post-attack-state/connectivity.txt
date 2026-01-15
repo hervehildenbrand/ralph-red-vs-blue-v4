@@ -1,0 +1,27 @@
+=== POST-ATTACK VERIFICATION - Round 14 ===
+
+=== VRF ALPHA ===
+PING 192.168.4.2 (192.168.4.2): 56 data bytes
+64 bytes from 192.168.4.2: seq=0 ttl=62 time=2.467 ms
+64 bytes from 192.168.4.2: seq=1 ttl=62 time=2.741 ms
+64 bytes from 192.168.4.2: seq=2 ttl=62 time=2.642 ms
+
+--- 192.168.4.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 2.467/2.616/2.741 ms
+
+=== VRF BETA ===
+PING 192.168.5.2 (192.168.5.2): 56 data bytes
+
+--- 192.168.5.2 ping statistics ---
+3 packets transmitted, 0 packets received, 100% packet loss
+
+=== VRF GAMMA ===
+PING 192.168.6.2 (192.168.6.2): 56 data bytes
+64 bytes from 192.168.6.2: seq=0 ttl=62 time=2.445 ms
+64 bytes from 192.168.6.2: seq=1 ttl=62 time=2.583 ms
+64 bytes from 192.168.6.2: seq=2 ttl=62 time=2.512 ms
+
+--- 192.168.6.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 2.445/2.513/2.583 ms

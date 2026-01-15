@@ -1,0 +1,51 @@
+# ISIS Adjacencies - Round 3 - post-attack
+# Timestamp: 2026-01-15T06:07:05Z
+
+=== pe1 ===
+
+> show isis neighbors
+! IS-IS (CORE) has incorrect configuration: IS-IS IPv4 and IPv6 address family are configured but IPv6 unicast routing is not enabled for instance CORE at line 1
+ 
+Instance  VRF      System Id        Type Interface          SNPA              State Hold time   Circuit Id          
+CORE      default  p1               L2   Ethernet1          P2P               UP    22          44                  
+
+=== pe2 ===
+
+> show isis neighbors
+! IS-IS (CORE) has incorrect configuration: IS-IS IPv4 and IPv6 address family are configured but IPv6 unicast routing is not enabled for instance CORE at line 1
+ 
+Instance  VRF      System Id        Type Interface          SNPA              State Hold time   Circuit Id          
+CORE      default  p1               L2   Ethernet1          P2P               UP    26          62                  
+
+=== pe3 ===
+
+> show isis neighbors
+! IS-IS (CORE) has incorrect configuration: IS-IS IPv4 and IPv6 address family are configured but IPv6 unicast routing is not enabled for instance CORE at line 1
+ 
+Instance  VRF      System Id        Type Interface          SNPA              State Hold time   Circuit Id          
+CORE      default  p2               L2   Ethernet1          P2P               UP    21          65                  
+
+=== pe4 ===
+
+> show isis neighbors
+! IS-IS (CORE) has incorrect configuration: IS-IS IPv4 and IPv6 address family are configured but IPv6 unicast routing is not enabled for instance CORE at line 1
+ 
+Instance  VRF      System Id        Type Interface          SNPA              State Hold time   Circuit Id          
+CORE      default  p3               L2   Ethernet1          P2P               UP    21          54                  
+
+=== pe5 ===
+
+> show isis neighbors
+! IS-IS (CORE) has incorrect configuration: IS-IS IPv4 and IPv6 address family are configured but IPv6 unicast routing is not enabled for instance CORE at line 1
+ 
+Instance  VRF      System Id        Type Interface          SNPA              State Hold time   Circuit Id          
+CORE      default  p3               L2   Ethernet1          P2P               UP    27          36                  
+CORE      default  p4               L2   Ethernet2          P2P               UP    24          38                  
+
+=== pe6 ===
+
+> show isis neighbors
+! IS-IS (CORE) has incorrect configuration: IS-IS IPv4 and IPv6 address family are configured but IPv6 unicast routing is not enabled for instance CORE at line 1
+ 
+Instance  VRF      System Id        Type Interface          SNPA              State Hold time   Circuit Id          
+CORE      default  p4               L2   Ethernet1          P2P               UP    24          42                  
