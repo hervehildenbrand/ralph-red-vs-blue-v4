@@ -1177,7 +1177,7 @@ show bgp neighbors X received-routes  # Compared received vs accepted
                 <span class="toggle">▼</span>
             </div>
             <div class="section-content">
-                <div class="code-block" style="font-size: 0.8rem;">
+                <div class="code-block" style="font-size: 0.8rem; white-space: pre; overflow-x: auto;">
                                            SITE 1                                      SITE 2
 ┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
 │                                                                                                 │
@@ -1232,44 +1232,17 @@ VRF Mapping:
                     <tr><td><strong>Platform</strong></td><td>ContainerLab 0.71.1</td></tr>
                     <tr><td><strong>Image</strong></td><td>Arista cEOS 4.35.1F</td></tr>
                     <tr><td><strong>Nodes</strong></td><td>18 (2 RR, 4 P, 6 PE, 6 CE)</td></tr>
-                    <tr><td><strong>Server</strong></td><td>192.168.1.12 (Ubuntu + Docker)</td></tr>
                     <tr><td><strong>Framework</strong></td><td>RALPH + GAIT</td></tr>
                 </table>
 
                 <h3 style="margin-top: 20px;">Lab Recovery Issues</h3>
                 <p style="color: var(--text-secondary);">During execution, baseline configs had several bugs that were fixed:</p>
                 <ul style="margin-left: 20px; margin-top: 10px; color: var(--text-secondary);">
-                    <li>P2-P3 IP mismatch (fixed: P3 Ethernet2 → 10.2.2.1/31)</li>
-                    <li>PE3-P2 IP mismatch (fixed: PE3 Ethernet1 → 10.3.4.1/31)</li>
+                    <li>P2-P3 IP mismatch (fixed: P3 Ethernet2)</li>
+                    <li>PE3-P2 IP mismatch (fixed: PE3 Ethernet1)</li>
                     <li>RR next-hop-self causing VPN label issues (removed from both RRs)</li>
                     <li>RCF not available in cEOS (adapted attacks to use route-maps)</li>
                 </ul>
-
-                <h3 style="margin-top: 20px;">Attack Modifications</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Round</th>
-                            <th>Original Attack</th>
-                            <th>Modified To</th>
-                            <th>Reason</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>10</td>
-                            <td>RCF Logic Inversion</td>
-                            <td>Route-map Inversion</td>
-                            <td>RCF not available in cEOS</td>
-                        </tr>
-                        <tr>
-                            <td>14</td>
-                            <td>IPv6 Multi-topology</td>
-                            <td>VRF RT Import Removal</td>
-                            <td>Lab IPv4-only for VRF traffic</td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
 
@@ -1366,7 +1339,7 @@ VRF Mapping:
 
                 <!-- Project Structure -->
                 <h3 style="margin-top: 25px;">Project Structure</h3>
-                <div class="code-block" style="font-family: monospace; font-size: 0.8rem;">
+                <div class="code-block" style="font-family: monospace; font-size: 0.8rem; white-space: pre;">
 <span style="color: var(--accent-yellow);">projects/ralph-red-vs-blue-v4/</span>
 ├── <span style="color: var(--accent-red);">ralph-red/</span>                    <span style="color: var(--text-muted);"># Red Team autonomous agent</span>
 │   ├── PROMPT.md                 <span style="color: var(--text-muted);"># Per-round attack specification</span>
@@ -1939,7 +1912,7 @@ VRF Mapping:
                 </div>
 
                 <h3 style="margin-top: 25px;">Evidence Directory Structure</h3>
-                <div class="code-block" style="font-size: 0.8rem;">
+                <div class="code-block" style="font-size: 0.8rem; white-space: pre;">
 rounds/
 ├── round-01/
 │   ├── evidence/
